@@ -1,0 +1,10 @@
+{% extends "tasks/layout.html" %}
+
+{% block body %}
+    <h1>{{ tittleapp }}</h1>
+    <br>
+    {% for task in tasks %}
+        <li>{{ task }}</li>
+    {% endfor %}
+    <a href="{% url 'thetasksapp:add' %}">Add a New Task</a>
+{% endblock %}
