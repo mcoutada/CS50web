@@ -1,40 +1,130 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>{% block title %}Auctions{% endblock %}</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
-    </head>
-    <body>
-        <h1>Auctions</h1>
-        <div>
-            {% if user.is_authenticated %}
-                Signed in as <strong>{{ user.username }}</strong>.
-            {% else %}
-                Not signed in.
-            {% endif %}
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Auctions{% endblock %}</title>
+    <!-- Bootstrap CSS - Must always be the first CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <!-- personal styling -->
+    <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+</head>
+
+<body class="bg-transparent">
+    <div class="container-fluid m-0 p-0">
+        <!-- header -->
+        <div class="row m-0 p-0">
+            <div class="col-12 m-0 p-0">
+                <header id="header">
+                    <nav id="nav-bar" class=" navbar navbar-expand-md navbar-dark fixed-top bg-dark py-1 ">
+                        <a class="navbar-brand" href="{% url 'index' %}">
+                            <div class="alert alert-info m-0">
+                                {% if user.is_authenticated %}
+                                Signed in as <strong>{{ user.username }}</strong>.
+                                {% else %}
+                                <a href="{% url 'login' %}">Not signed in.</a>
+                                {% endif %}
+                            </div>
+                        </a>
+                        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                            data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
+                                </li>
+                                {% if user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'newListing' %}">Create a New Listing</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'watchlist' %}">My Watchlist</a>
+                                </li>
+                                {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </nav>
+                </header>
+            </div>
         </div>
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
-            </li>
-            {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
-                </li>
-            {% endif %}
-        </ul>
-        <hr>
-        {% block body %}
-        {% endblock %}
-    </body>
+        <!-- center row (content, between header and footer) -->
+        <div class="row m-0 p-0">
+            <!-- left column -->
+            <div class="col-lg-2 col-md-1 col-sm-1 m-0 p-0">
+            </div>
+            <!-- middle column -->
+            <div class="col-lg-8 col-md-10 col-sm-10 mx-0 px-0 my-4 mx-2">
+                <main class="alert alert-primary" role="main" id="main">
+                    <div class="row">
+                        <div class="col">
+                            <h1>Auctions</h1>
+                            <hr>
+                            {%if message%}
+                            <div class="alert alert-info" style="text-align: center;" role="alert">
+                                {{ message | safe }}
+                            </div>
+                            {%endif%}
+                            {% block body %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <!-- right column -->
+            <div class="col-lg-2 col-md-1 col-sm-1 m-0 p-0">
+            </div>
+        </div>
+        <!-- footer -->
+        <div class="row m-0 p-0">
+            <div class="col-12 m-0 p-0">
+                <footer
+                    class="text-muted bg-dark d-flex flex-wrap justify-content-lg-between justify-content-md-center justify-content-sm-center align-items-center m-0 p-1">
+                    <p class="m-1"><a href="https://cs50.harvard.edu/web/2020/projects/2/commerce/">Commerce
+                            Exercise</a> done as part of a Web Development training provided
+                        by
+                        <a href="https://www.dorscodingschool.com/">Dor's Coding School</a> along with <a
+                            href="https://cs50.harvard.edu/web/2020/">Harvard's CS50 Web Course</a>.</p>
+                    <div
+                        class="socialMediaLinks d-flex flex-nowrap justify-content-around align-items-center alert alert-info px-0 py-1 mx-0 my-1">
+                        <a href="https://linkedin.com/in/mcoutada" target="_blank"
+                            class="fab fa-linkedin-in px-0 py-1 mx-1 my-0"></a>
+                        <a href="https://marianocoutada.site/" target="_blank"
+                            class="far fa-sticky-note px-0 py-1 mx-1 my-0"></a>
+                        <a href="https://github.com/mcoutada" target="_blank"
+                            class="fab fa-github px-0 py-1 mx-1 my-0"></a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>

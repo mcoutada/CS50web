@@ -1,3 +1,63 @@
-body {
-    padding: 10px;
+/* Style inputs, select elements and textareas */
+input, select, textarea{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+  
+  /* Style the label to display next to the inputs */
+  label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+  }
+
+  html {
+    background: url(../img/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    scroll-behavior: smooth;
+    /* height of sticky header and footer to not overlap the content */
+    scroll-padding-top: 70px;
+    scroll-padding-bottom: 70px;
 }
+
+body {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+footer{
+    position: fixed;
+    Width: 100%;
+    bottom: 0;
+}
+/* same as the above but for small devices  */
+
+@media screen and (max-width: 768px) {
+    body {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+}
+
+/* social media icons style */
+
+.socialMediaLinks a {
+    font-size: 28px;
+    /* color: #000000; */
+    text-decoration: none;
+    background: #b7b6b6;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10%;
+    height: 35px;
+    width: 35px;
+}
+
+
+

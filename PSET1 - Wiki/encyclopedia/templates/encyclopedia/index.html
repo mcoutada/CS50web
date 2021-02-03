@@ -11,9 +11,9 @@
         <h1>All Pages:</h1>
     {% endif %}
 
-    <ul>
+    <ul class="list-group w-25">
         {% for entry in entries %}
-            <a href="{% url 'entry' entry %}"><li>{{ entry }}</li></a>
+            <li class="list-group-item"><a href="{% url 'entry' entry %}">{{ entry }}</a></li>
         {% endfor %}
     </ul>
 

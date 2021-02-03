@@ -1,4 +1,4 @@
-body {
+/* body {
     margin: 0;
     background-color: white;
 }
@@ -35,4 +35,35 @@ textarea {
 
 .sidebar h2 {
     margin-top: 5px;
+} */
+
+html {
+    background: url(img/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    scroll-behavior: smooth;
+    /* height of sticky header and footer to not overlap the content */
+    scroll-padding-top: 70px;
+    scroll-padding-bottom: 70px;
+}
+
+body {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+footer{
+    position: fixed;
+    Width: 100%;
+    bottom: 0;
+}
+/* same as the above but for small devices  */
+
+@media screen and (max-width: 768px) {
+    body {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
 }

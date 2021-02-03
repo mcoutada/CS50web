@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Tasks</title>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                const inputElem = document.querySelector('#task')
+                const ulElem = document.querySelector('#tasks')
+                const submitElem = document.querySelector('#submit')
+                const formElem = document.querySelector('form')
+                
+                submitElem.disabled = true;
+
+                inputElem.onkeyup = () => {
+                    // if (!inputElem.value == '') {
+                 if (inputElem.value.length > 0) {
+                        submitElem.disabled = false;
+                    } else {
+                        submitElem.disabled = true;
+                    };
+                }
+
+                formElem.onsubmit = (event) => {
+                let listItem = document.createElement("li");
+                listItem.innerText = inputElem.value;
+                ulElem.appendChild(listItem);
+                inputElem.value = '';
+                submitElem.disabled = true;
+                event.preventDefault();
+
+            };
+            });
+          </script>
+    </head>
+    <body>
+        <h1>Tasks</h1>
+        <ul id="tasks"></ul>
+        <form>
+            <input id="task" placeholder = "New Task" type="text" autofocus>
+            <input id="submit" type="submit">
+        </form>
+    </body>
+</html>
