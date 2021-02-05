@@ -26,21 +26,7 @@ class Listing(models.Model):
     
     def __str__(self):
         return f"{self.title} - {self.startingBid}"
-
-# class Bid(models.Model):
-#     auction = models.ForeignKey(Listing, on_delete=models.CASCADE)
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     offer = models.FloatField()
-#     date = models.DateTimeField(auto_now=True)    
-
-# class Bid(models.Model):
-#     creation_date = models.DateTimeField(default=timezone.now)
-#     is_active = models.BooleanField(default=True)    
-#     buyer = models.ForeignKey(User, default=null, null=True, on_delete=models.PROTECT)
-#     watchers = models.ManyToManyField(User, blank=True, related_name="watched_listings")
-#     seller = models.ForeignKey('User', on_delete=models.CASCADE, related_name='user_who_make_the_auction')
-
-
+    
 class Comment(models.Model):
     comment = models.CharField(max_length=100)
     created = models.DateTimeField(default=timezone.now)
@@ -50,10 +36,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.user}: {self.comment}"
-# class comment(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_coms")
-#     comment = models.CharField(max_length=255)
-#     time = models.DateTimeField(auto_now_add=True, blank=True)
+
 
 class Watchlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="watchlist")

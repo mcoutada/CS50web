@@ -14,7 +14,37 @@ from auctions.models import *
 class newListingForm(ModelForm):
     class Meta:
         model = Listing
-        fields = ['title', 'description', 'startingBid','image', 'category','startingBid']
+        fields = [
+            "title",
+            "description",
+            "startingBid",
+            "image",
+            "category",
+            "startingBid",
+        ]
+
+
+class newCommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["comment"]
+        widgets = {
+            "comment": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Leave your comment here",
+                }
+            )
+        }
+
+
+class newBidForm(ModelForm):
+    class Meta:
+        model = Listing
+        fields = ["currentBid"]
+        labels = {
+            'currentBid': 'New Bid',
+        }
 
 def index(request):
     category_id = request.GET.get("category", None)
@@ -25,12 +55,15 @@ def index(request):
         selectedCategory = Category.objects.get(id=category_id)
     categories = Category.objects.all()
 
-    return render(request, "auctions/index.html", {
-        "listings": listings,
-        "categories": categories,
-        "selectedCategory":selectedCategory if category_id else None,
-    })
-
+    return render(
+        request,
+        "auctions/index.html",
+        {
+            "listings": listings,
+            "categories": categories,
+            "selectedCategory": selectedCategory if category_id else None,
+        },
+    )
 
 
 @login_required
@@ -38,8 +71,8 @@ def listing(request, listing_id):
     listing = Listing.objects.get(id=listing_id)
     user = User.objects.get(username=request.user)
     if request.method == "POST":
-        if request.POST.get("button") == "Watchlist": 
-            if not user.watchlist.filter(listing= listing):
+        if request.POST.get("button") == "Watchlist":
+            if not user.watchlist.filter(listing=listing):
                 watchlist = Watchlist()
                 watchlist.user = user
                 watchlist.listing = listing
@@ -48,81 +81,123 @@ def listing(request, listing_id):
             else:
                 user.watchlist.filter(listing=listing).delete()
                 watchlistMsg = "Add to Watchlist"
-        return HttpResponseRedirect(reverse('listing', kwargs={'listing_id':listing_id}))
+        return HttpResponseRedirect(
+            reverse("listing", kwargs={"listing_id": listing_id})
+        )
 
     else:
-        if user.watchlist.filter(listing= listing):
+        if user.watchlist.filter(listing=listing):
             watchlistMsg = "Remove from Watchlist"
         else:
-            watchlistMsg = "Add to Watchlist"       
-        return render(request, "auctions/listing.html", {
+            watchlistMsg = "Add to Watchlist"
+        return render(
+            request,
+            "auctions/listing.html",
+            {
+                "listing": listing,
+                "watchlistMsg": watchlistMsg,
+                "form": newBidForm(),
+                "comments": listing.get_comments.all(),
+                "comment_form": newCommentForm(),
+            },
+        )
+
+
+@login_required
+def new_bid(request, listing_id):
+    listing = Listing.objects.get(id=listing_id)
+    # offer = request.POST.get("Bid").value
+    offer = float(request.POST['currentBid'])
+    user = User.objects.get(username=request.user)
+
+    if user.watchlist.filter(listing=listing):
+        watchlistMsg = "Remove from Watchlist"
+    else:
+        watchlistMsg = "Add to Watchlist"
+
+    if offer > max(listing.currentBid, listing.startingBid):
+        bidMessage = "Congrats! Your the current buyer"
+        listing.currentBid = offer
+        listing.buyer = user
+        form = newBidForm(request.POST)
+        listing.save()
+    else:
+        bidMessage = "Your bid is not higher than the current value"
+
+    return render(
+        request,
+        "auctions/listing.html",
+        {
             "listing": listing,
-            "watchlistMsg":watchlistMsg,
-            # "listing_pictures": listing.get_pictures.all(),
-            # "form": newBidForm(),
-            # "comments": listing.get_comments.all(),
-            # "comment_form": newCommentForm()        
-        })
+            "form": newBidForm(),
+            "message": bidMessage,
+            "watchlistMsg": watchlistMsg,
 
-# @login_required
-# def addToWatchlist(request, listing_id):
-#     user = request.user
-#     listing = Listing.objects.get(pk=listing_id)
-#     try:
-#         Watchlist.objects.get(user = user) 
-#     except:
-#         Watchlist.objects.create(user = user)
-#     watchlist = Watchlist.objects.get(user = user)
-#     watchlist.item.add(listing)
-#     watchlist.save()
-#     return HttpResponseRedirect(reverse('listing', kwargs={'listing_id':listing_id}))
+        },
+    )
 
-# @login_required
-# def remFromWatchlist(request, listing_id):
-#     user = request.user
-#     listing = Listing.objects.get(pk=listing_id)
-#     watchlist = Watchlist.objects.get(user = user)
-#     watchlist.item.remove(listing)
-#     watchlist.save()
-#     return HttpResponseRedirect(reverse('listing', kwargs={'listing_id':listing_id}))
 
 @login_required
 def watchlist(request):
-    listing_ids = Watchlist.objects.filter(user_id = request.user).values('listing_id')
-    listing = Listing.objects.filter(id__in = listing_ids)
-    return render(request, "auctions/watchlist.html", {
-        "listings": listing
-    })
+    listing_ids = Watchlist.objects.filter(user_id=request.user).values("listing_id")
+    listing = Listing.objects.filter(id__in=listing_ids)
+    return render(request, "auctions/watchlist.html", {"listings": listing})
 
 
 @login_required
 def newListing(request):
-   
-    if request.method == "POST":        
+
+    if request.method == "POST":
         form = newListingForm(request.POST, request.FILES)
-        
-       
+
         if form.is_valid():
             newListing = form.save(commit=False)
             newListing.seller = request.user
             newListing.save()
 
-            return render(request, "auctions/newListing.html", {
-                "form": newListingForm(),
-                "message": "Successfully created"
-        })
+            return render(
+                request,
+                "auctions/newListing.html",
+                {"form": newListingForm(), "message": "Successfully created"},
+            )
         else:
-            return render(request, "auctions/newListing.html", {
-                "form": newListingForm(),
-                "message": "invalid form"
-            })
+            return render(
+                request,
+                "auctions/newListing.html",
+                {"form": newListingForm(), "message": "invalid form"},
+            )
     else:
-        return render(request, "auctions/newListing.html", {
-            "form": newListingForm()
-        })    
-    
+        return render(request, "auctions/newListing.html", {"form": newListingForm()})
 
+
+@login_required
+def comment(request, listing_id):
+    listing = Listing.objects.get(id=listing_id)
+    form = newCommentForm(request.POST)
+    newComment = form.save(commit=False)
+    newComment.user = request.user
+    newComment.listing = listing
+    newComment.save()
+    return HttpResponseRedirect(reverse("listing", kwargs={"listing_id": listing_id}))
+
+
+def close_listing(request, listing_id):
+    listing = Listing.objects.get(id=listing_id)
+    if request.user == listing.seller:
+        listing.is_active = False
+        listing.save()
+        return HttpResponseRedirect(
+            reverse("listing", kwargs={"listing_id": listing_id})
+        )
+    else:
+        listing.watchers.add(request.user)
+    return HttpResponseRedirect(reverse("watchlist"))
+
+
+###########################################################################################
 # the below is code provided by CS50
+###########################################################################################
+
 
 def login_view(request):
     if request.method == "POST":

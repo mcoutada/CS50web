@@ -16,15 +16,61 @@
                                 <div class="card-body">
                                     <p class="card-text">{{ listing.description }}</p>
                                     <li class="list-group-item"> Starting Bid: ${{ listing.startingBid }}</li>
-                                    <li class="list-group-item"> Current Bid: ${{ listing.currentBid }}</li>
+                                    <li class="list-group-item">{{ listing.is_active|yesno:"Current Bid, Sold at" }}:  ${{ listing.currentBid }}</li>
 
                                     {% if user.is_authenticated %}
+
+                                        {% if  user == listing.seller and listing.is_active %}
+                                            <li class="list-group-item">
+                                                <a class="btn btn-outline-primary" href="{% url 'close_listing' listing.id %}" role="button">Close Auction</a>
+                                            </li>
+                                        {% endif %}
+                                        {% if  user == listing.buyer and not listing.is_active %}
+                                            <li class="list-group-item">
+                                                <div class="alert alert-info">You won this auction!</div>
+                                            </li>
+                                        {% endif %}
+
+                                         {% if listing.is_active  %} {% comment %}and user != listing.seller {% endcomment %}
+                                            <li class="list-group-item">
+                                                {%if bidMessage%}
+                                                <div class="alert alert-info" style="text-align: center;" role="alert">
+                                                    {{ bidMessage }}
+                                                </div>
+                                                {%endif%}
+                                                <div class="form-group">
+                                                    <form action="{% url 'new_bid' listing.id %}" method="post">
+                                                        {% csrf_token %}
+                                                        {{ form }}        
+                                                        <input type=submit value="Bid">
+                                                    </form>                    
+                                                </div>
+                                            </li>       
+                                        {% endif %}
+
                                         <li class="list-group-item">
-                                            {% comment %} <a href="{% url 'listing' listing.id %}" role="button" class="btn btn-outline-success btn-sm">{{ watchlistMsg }}</a> {% endcomment %}
                                         <form action="{% url 'listing' listing.id %}" method="POST">
                                             {% csrf_token %}
-                                            <button type="submit" name="button" value="Watchlist" class="btn btn-secondary btn-sm">{{ watchlistMsg }}</button>
+                                            <button type="submit" name="button" value="Watchlist" class="btn btn-outline-primary">{{ watchlistMsg }}</button>
                                         </form>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <h4>Comments</h4>
+                                            <div class="form-group">
+                                                <form action="{% url 'comment' listing.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    {{ comment_form }}        
+                                                    <input type = submit value="Comment">
+                                                </form>                    
+                                            </div>            
+                                            {% for comment in comments %}
+                                            <ul class="list-group-flush m-0 p-0">
+                                                <li class="list-group-item">
+                                                {{ comment.comment }}<br>
+                                                <small class="text-muted">{{ comment.user }} commented on {{ comment.created|date:"Y-m-d" }}</small>                                          
+                                                </li>
+                                            </ul>    
+                                            {% endfor %}
                                         </li>
                                     {% endif %}
                                 </div>
