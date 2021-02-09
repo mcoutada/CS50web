@@ -16,12 +16,6 @@
     {% endif %}
 
     <div class="form-group w-75">
-        {%if message%}
-            <div class="alert alert-danger" style="text-align: center;" role="alert">
-                {{ message | safe }}
-            </div>
-        {%endif%}
-
         <form action="{% url 'addEntry' %}" method="post">
             {% csrf_token %}
             {{ form }}

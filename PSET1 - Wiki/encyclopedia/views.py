@@ -43,7 +43,7 @@ def entry(request, entry):
     if entryhtml is None:
 
         return render(
-            request, "encyclopedia/error.html", {"errMsg": "Oops. Page Not Found (404)"}
+            request, "encyclopedia/error.html", {"errMsg": "Page Not Found (404)"}
         )
     else:
         return render(
@@ -118,7 +118,7 @@ def edit(request, entry):
     validEntry = util.get_entry(entry)
     if validEntry is None:
         return render(
-            request, "encyclopedia/error.html", {"errMsg": "Oops. Page Not Found (404)"}
+            request, "encyclopedia/error.html", {"errMsg": "Page Not Found (404)"}
         )
     else:
         form = NewEntryForm()
