@@ -43,8 +43,9 @@ class newBidForm(ModelForm):
         model = Listing
         fields = ["currentBid"]
         labels = {
-            'currentBid': 'New Bid',
+            "currentBid": "New Bid",
         }
+
 
 def index(request):
     category_id = request.GET.get("category", None)
@@ -107,7 +108,7 @@ def listing(request, listing_id):
 def new_bid(request, listing_id):
     listing = Listing.objects.get(id=listing_id)
     # offer = request.POST.get("Bid").value
-    offer = float(request.POST['currentBid'])
+    offer = float(request.POST["currentBid"])
     user = User.objects.get(username=request.user)
 
     if user.watchlist.filter(listing=listing):
@@ -132,7 +133,6 @@ def new_bid(request, listing_id):
             "form": newBidForm(),
             "message": bidMessage,
             "watchlistMsg": watchlistMsg,
-
         },
     )
 
