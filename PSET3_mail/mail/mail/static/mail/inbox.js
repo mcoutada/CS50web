@@ -24,7 +24,7 @@ function compose_email(recipients, subject, body) {
   document.querySelector("#email-view").style.display = "none";
 
   // values will be empty in case of a new email call or certain in case of a reply call
-  document.querySelector("#compose-recipients").value = recipients;
+  document.querySelector("#compose-recipients").value = recipients.toString();
   document.querySelector("#compose-subject").value = subject;
   document.querySelector("#compose-body").value = body;
 
@@ -62,6 +62,7 @@ function load_mailbox(mailbox) {
   fetch(`/emails/${mailbox}`)
     .then((response) => response.json())
     .then((emails) => {
+      console.log(emails);
       var list = document.querySelector("#emails-list");
       list.innerHTML = "";
       console.log(emails);
@@ -72,7 +73,7 @@ function load_mailbox(mailbox) {
                                <span>${
                                  mailbox != "sent"
                                    ? element.sender
-                                   : element.recipients
+                                   : element.recipients.toString()
                                }</span>
                                <span>${element.subject}</span>
                                <span>${element.timestamp}</span>
@@ -105,7 +106,7 @@ function view_email(emailId, showArchiveBtn) {
       console.log(email);
 
       document.querySelector("#email-from").value = email.sender;
-      document.querySelector("#email-to").value = email.recipients;
+      document.querySelector("#email-to").value = email.recipients.toString();
       document.querySelector("#email-subject").value = email.subject;
       document.querySelector("#email-body").value = email.body;
 
