@@ -34,7 +34,7 @@ def getProducts(request):
 @api_view(['GET'])
 def getProduct(request, pk):
     product = Product.objects.get(_id=pk)
-    serializer = ProductSerializer(products, many=False)
+    serializer = ProductSerializer(product, many=False)
 
     # for i in products:
     #     if i['_id'] == pk:
