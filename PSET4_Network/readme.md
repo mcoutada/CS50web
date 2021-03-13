@@ -456,6 +456,6 @@ If everything went well, the messages should appear in
 http://localhost:8000/  
 http://localhost:8000/register  
   
-The code should look like the repository up to this commit:
+The code should look like the PSET4_Network folder up to this commit:
 https://github.com/mcoutada/CS50web/tree/fc42ecf42c2e7aaa1f23fe75b231fa301495f702
     
