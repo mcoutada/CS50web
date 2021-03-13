@@ -278,15 +278,19 @@ Last part of layout.html should look like this:
 </body></html>  
 ```  
   
-### change the styles.css path at the top of layout.html  
+### Change the styles.css path at the top of layout.html  
 Open layout.html  
 located at  
 C:\PSET4_Network\project4\frontend\templates\network  
 On line 8, change this:  
+```  
         <link href="{% static 'network/styles.css' %}" rel="stylesheet">  
+```  
 To this:  
+```  
         <link href="{% static 'css/styles.css' %}" rel="stylesheet">  
-  
+```  
+
 ### On the main urls.py located at project4\project4. Add path("", include("frontend.urls")) to urlpatterns  
 Open urls.py in  
 C:\PSET4_Network\project4\project4\  
@@ -338,8 +342,10 @@ https://github.com/mcoutada/CS50web/tree/ee559432fabdb58d5b388aad12b1e16e795a388
 Open layout.html in  
 C:\PSET4_Network\project4\frontend\templates\network  
 Erase line 49:  
+```  
 <div id="app"></div>  
-  
+```  
+
 ### Delete App.js  
 Located at  
 C:\PSET4_Network\project4\frontend\src\components\App.js  
