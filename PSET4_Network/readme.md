@@ -254,7 +254,7 @@ const AppDiv = document.getElementById('app');
 ReactDOM.render(<div><App/></div>, AppDiv);  
 ```  
   
-### add a div with id=main, and a script html tag for main.js before closing the body tag in layout.html  
+### Add a div with id=main, and a script html tag for main.js before closing the body tag in layout.html  
 Add  
 ```  
     <div id="app"></div>  
@@ -265,7 +265,7 @@ before
     </body>  
 ```  
 in  
-C:\Users\asd\Desktop\tests\CS50Web\mygithub\PSET4_Network\project4\frontend\templates\network\layout.html  
+C:\PSET4_Network\project4\frontend\templates\network\layout.html  
 Last part of layout.html should look like this:  
 ```  
         <div class="body">  
@@ -281,7 +281,7 @@ Last part of layout.html should look like this:
 ### change the styles.css path at the top of layout.html  
 Open layout.html  
 located at  
-C:\Users\asd\Desktop\tests\CS50Web\mygithub\PSET4_Network\project4\frontend\templates\network  
+C:\PSET4_Network\project4\frontend\templates\network  
 On line 8, change this:  
         <link href="{% static 'network/styles.css' %}" rel="stylesheet">  
 To this:  
