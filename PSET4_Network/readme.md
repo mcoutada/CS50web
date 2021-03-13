@@ -4,7 +4,7 @@ See this tutorial to understand how react is implemented in the frontend (videos
   
 [https://www.youtube.com/watch?v=JD-age0BPVo&list=RDCMUC4JX40jDee_tINbkjycV4Sg](https://www.youtube.com/watch?v=JD-age0BPVo&list=RDCMUC4JX40jDee_tINbkjycV4Sg)
   
-###Some commands used in the Tutorial###
+### Some commands used in the Tutorial### 
 pip install djangorestframework
 django-admin startproject music_controller
 cd music_controller
@@ -53,14 +53,14 @@ C:\PSET4_Network\project4\frontend\static\css
 Delete the network folder that was originally inside the static folder
 C:\PSET4_Network\project4\frontend\static\network
 
-###Copy views.py from network to frontend views.py
+### Copy views.py from network to frontend views.py
 copy views.py
 from
 C:\PSET4_Network\project4\network
 to
 C:\PSET4_Network\project4\frontend
 
-###Erase the network views.py content and just leave the index function
+### Erase the network views.py content and just leave the index function
 ```
 from django.shortcuts import render
 
@@ -76,7 +76,7 @@ from .models import User
 to
 from network.models import User
 
-###Create a urls.py for frontend, copy everything from urls.py from Network to urls.py on frontend
+### Create a urls.py for frontend, copy everything from urls.py from Network to urls.py on frontend
 Copy urls.py
 from
 C:\PSET4_Network\project4\network
@@ -97,7 +97,7 @@ urlpatterns = [
 ```
 
 
-###Leave only path(“”, views.index, name=“index”), on urls.py from network.
+### Leave only path(“”, views.index, name=“index”), on urls.py from network.
 Open urls.py
 located at:
 C:\PSET4_Network\project4\network
@@ -110,13 +110,13 @@ from . import views
 urlpatterns = [path("", views.index, name="index")]
 ```
 
-###Create folders src and src/components inside frontend
+### Create folders src and src/components inside frontend
 create folders
 C:\PSET4_Network\project4\frontend\src
 and
 C:\PSET4_Network\project4\frontend\src\components
 
-###run the following commands in frontend
+### run the following commands in frontend
 cd C:\PSET4_Network\project4\frontend
 npm init -y
 npm i webpack webpack-cli --save-dev
@@ -326,9 +326,9 @@ http://localhost:8000/
 Everything should look like in this repository up to this commit
 https://github.com/mcoutada/CS50web/tree/ee559432fabdb58d5b388aad12b1e16e795a388e
 
-###Now that everything works let's undo the Hello World App. And Create the Home and Register Apps.
+### Now that everything works let's undo the Hello World App. And Create the Home and Register Apps.
 
-###Erase div="app" in layout.html
+### Erase div="app" in layout.html
 Open layout.html in
 C:\PSET4_Network\project4\frontend\templates\network
 Erase line 49:
