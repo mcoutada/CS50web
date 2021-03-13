@@ -4,7 +4,7 @@ See this tutorial to understand how react is implemented in the frontend (videos
   
 [https://www.youtube.com/watch?v=JD-age0BPVo&list=RDCMUC4JX40jDee_tINbkjycV4Sg](https://www.youtube.com/watch?v=JD-age0BPVo&list=RDCMUC4JX40jDee_tINbkjycV4Sg)
   
-**Some commands used in the Tutorial**
+###Some commands used in the Tutorial###
 pip install djangorestframework
 django-admin startproject music_controller
 cd music_controller
@@ -19,23 +19,23 @@ The steps below are the adaptation of the 3rd video.
 Download and unzip Network base code:
 https://cs50.harvard.edu/web/2020/projects/4/network/#getting-started
 
-** make the initial setup to the db and admin
+### make the initial setup to the db and admin
 cd C:\PSET4_Network\project4
 python manage.py makemigrations
 python manage.py migrate
 
-** Create a Django app called frontend
+### Create a Django app called frontend
 cd C:\PSET4_Network\project4
 django-admin startapp frontend
 
-** Move the templates folder from the network app to frontend
+### Move the templates folder from the network app to frontend
 move templates
 from
 C:\PSET4_Network\project4\network
 to
 C:\PSET4_Network\project4\frontend
 
-** Move static folder from network to frontend. Create css, frontend and images folders inside of it. Move styles.css inside the css folder 
+### Move static folder from network to frontend. Create css, frontend and images folders inside of it. Move styles.css inside the css folder 
 move static
 from
 C:\PSET4_Network\project4\network
@@ -53,22 +53,22 @@ C:\PSET4_Network\project4\frontend\static\css
 Delete the network folder that was originally inside the static folder
 C:\PSET4_Network\project4\frontend\static\network
 
-**Copy views.py from network to frontend views.py
+###Copy views.py from network to frontend views.py
 copy views.py
 from
 C:\PSET4_Network\project4\network
 to
 C:\PSET4_Network\project4\frontend
 
-**Erase the network views.py content and just leave the index function
----------------- file content ----------------
+###Erase the network views.py content and just leave the index function
+```
 from django.shortcuts import render
 
 def index(request):
     return render(request, "network/index.html")
----------------- file content ----------------
+```
 
-** On views.py in frontend set ".models" to "network.models"
+### On views.py in frontend set ".models" to "network.models"
 On views.py. Located at
 C:\PSET4_Network\project4\frontend
 change line 7 from
@@ -76,14 +76,14 @@ from .models import User
 to
 from network.models import User
 
-**Create a urls.py for frontend, copy everything from urls.py from Network to urls.py on frontend
+###Create a urls.py for frontend, copy everything from urls.py from Network to urls.py on frontend
 Copy urls.py
 from
 C:\PSET4_Network\project4\network
 to
 C:\PSET4_Network\project4\frontend
 it should have this content:
----------------- file content ----------------
+```
 from django.urls import include, path
 
 from . import views
@@ -94,29 +94,29 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("register", views.register, name="register"),
 ]
----------------- file content ----------------
+```
 
 
-**Leave only path(“”, views.index, name=“index”), on urls.py from network.
+###Leave only path(“”, views.index, name=“index”), on urls.py from network.
 Open urls.py
 located at:
 C:\PSET4_Network\project4\network
 Erase the needed to match this content:
----------------- file content ----------------
+```
 from django.urls import path
 
 from . import views
 
 urlpatterns = [path("", views.index, name="index")]
----------------- file content ----------------
+```
 
-**Create folders src and src/components inside frontend
+###Create folders src and src/components inside frontend
 create folders
 C:\PSET4_Network\project4\frontend\src
 and
 C:\PSET4_Network\project4\frontend\src\components
 
-**run the following commands in frontend
+###run the following commands in frontend
 cd C:\PSET4_Network\project4\frontend
 npm init -y
 npm i webpack webpack-cli --save-dev
@@ -127,13 +127,13 @@ npm install @babel/plugin-proposal-class-properties
 npm install react-router-dom
 :: (no need to tun "npm install @material-ui/icons" either)
 
-** create babel.config.json inside frontend
+### create babel.config.json inside frontend
 create a file called
 babel.config.json
 inside
 C:\PSET4_Network\project4\frontend
 with this content:
----------------- file content ----------------
+```
 {
     "presets": [
         [
@@ -148,14 +148,14 @@ with this content:
     ],
     "plugins": ["@babel/plugin-proposal-class-properties"]
 }
----------------- file content ----------------
+```
 
-** create webpack.config.json inside frontend
+### create webpack.config.json inside frontend
 create a file called
 webpack.config.json
 inside
 C:\PSET4_Network\project4\frontend
----------------- file content ----------------
+```
 const path = require("path");
 const webpack = require("webpack");
 
@@ -191,7 +191,7 @@ module.exports = {
         }),
     ],
 };
----------------- file content ----------------
+```
 (I needed to add this line
 'presets: ["@babel/react"]'
 in order for this code to work as the original from the tutorial was causing me errors)
@@ -199,32 +199,32 @@ original:
 https://github.com/techwithtim/Music-Controller-Web-App-Tutorial/blob/main/Tutorial%201%20-%204/frontend/webpack.config.js
 
 
-** Replace the scripts tag in package.json
+### Replace the scripts tag in package.json
 Open C:\PSET4_Network\project4\frontend\package.json
 Change "scripts":
 from:
----------------- file content ----------------
+```
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
----------------- file content ----------------
+```
 
 to:
----------------- file content ----------------
+```
   "scripts": {
     "dev": "webpack --mode development --watch",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
----------------- file content ----------------
+```
 
 
-** We are going to create a simple App to display a Hello World message. Create App.js inside frontend\src\components
+### We are going to create a simple App to display a Hello World message. Create App.js inside frontend\src\components
 Create
 Apps.js
 in
 C:\PSET4_Network\project4\frontend\src\components
----------------- file content ----------------
+```
 import React from 'react';
 
 const Apps = () => {
@@ -236,23 +236,23 @@ const Apps = () => {
 }
 
 export default Apps
----------------- file content ----------------
+```
 
-** Create the file index.js inside project4\frontend\src
+### Create the file index.js inside project4\frontend\src
 Create
 index.js
 in
 C:\PSET4_Network\project4\frontend\src
----------------- file content ----------------
+```
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App'
 
 const AppDiv = document.getElementById('app');
 ReactDOM.render(<div><App/></div>, AppDiv);
----------------- file content ----------------
+```
 
-** add a div with id=main, and a script html tag for main.js before closing the body tag in layout.html
+### add a div with id=main, and a script html tag for main.js before closing the body tag in layout.html
 Add
     <div id="app"></div>
     <script src="{% static "frontend/main.js" %}"></script>
@@ -261,7 +261,7 @@ before
 in
 C:\Users\asd\Desktop\tests\CS50Web\mygithub\PSET4_Network\project4\frontend\templates\network\layout.html
 Last part of layout.html should look like this:
----------------- file content ----------------
+```
         <div class="body">
             {% block body %}
             {% endblock %}
@@ -270,9 +270,9 @@ Last part of layout.html should look like this:
     <div id="app"></div>
     <script src="{% static "frontend/main.js" %}"></script>
 </body></html>
----------------- file content ----------------
+```
 
-** change the styles.css path at the top of layout.html
+### change the styles.css path at the top of layout.html
 Open layout.html
 located at
 C:\Users\asd\Desktop\tests\CS50Web\mygithub\PSET4_Network\project4\frontend\templates\network
@@ -281,25 +281,25 @@ On line 8, change this:
 To this:
         <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
-** On the main urls.py located at project4\project4. Add path("", include("frontend.urls")) to urlpatterns
+### On the main urls.py located at project4\project4. Add path("", include("frontend.urls")) to urlpatterns
 Open urls.py in
 C:\PSET4_Network\project4\project4\
 Edit urlpatterns (lines 19 to 23) to match this content:
----------------- file content ----------------
+```
 urlpatterns = [
     path("admin/", admin.site.urls),
     # path("", include("network.urls")),
     path("", include("frontend.urls")),
 ]
----------------- file content ----------------
+```
 
-** Add frontend.apps.FrontendConfig to INSTALLED_APPS in project4\project4\settings.py
+### Add frontend.apps.FrontendConfig to INSTALLED_APPS in project4\project4\settings.py
 open settings.py in
 C:\PSET4_Network\project4\project4
 Add
 'frontend.apps.FrontendConfig'
 at the end of INSTALLED_APPS
----------------- file content ----------------
+```
 INSTALLED_APPS = [
     'network',
     'django.contrib.admin',
@@ -310,9 +310,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'frontend.apps.FrontendConfig'
 ]
----------------- file content ----------------
+```
 
-** Run the backend and the frontend to see if you can render the Hello World message:
+### Run the backend and the frontend to see if you can render the Hello World message:
 Open a Terminal and run:
 cd C:\PSET4_Network\project4
 python manage.py runserver
@@ -326,23 +326,23 @@ http://localhost:8000/
 Everything should look like in this repository up to this commit
 https://github.com/mcoutada/CS50web/tree/ee559432fabdb58d5b388aad12b1e16e795a388e
 
-**Now that everything works let's undo the Hello World App. And Create the Home and Register Apps.
+###Now that everything works let's undo the Hello World App. And Create the Home and Register Apps.
 
-**Erase div="app" in layout.html
+###Erase div="app" in layout.html
 Open layout.html in
 C:\PSET4_Network\project4\frontend\templates\network
 Erase line 49:
 <div id="app"></div>
 
-** Delete App.js
+### Delete App.js
 Located at
 C:\PSET4_Network\project4\frontend\src\components\App.js
 
 
-** Create Home.js and Register.js in components (use the rafce shortcut to create an arrow function inside), return a simple message
+### Create Home.js and Register.js in components (use the rafce shortcut to create an arrow function inside), return a simple message
 
 C:\PSET4_Network\project4\frontend\src\components\Home.js
----------------- file content ----------------
+```
 import React from 'react'
 
 const Home = () => {
@@ -354,10 +354,10 @@ const Home = () => {
 }
 
 export default Home
----------------- file content ----------------
+```
 
 C:\PSET4_Network\project4\frontend\src\components\Register.js
----------------- file content ----------------
+```
 import React from 'react'
 
 const Register = () => {
@@ -369,11 +369,11 @@ const Register = () => {
 }
 
 export default Register
----------------- file content ----------------
+```
 
 
-** Edit index.js to erase App and render Register and Home
----------------- file content ----------------
+### Edit index.js to erase App and render Register and Home
+```
 import React from "react";
 import ReactDOM from "react-dom";
 import Register from "./components/Register";
@@ -399,10 +399,10 @@ const registerElement = document.getElementById("index");
 if (registerElement) {
     ReactDOM.render(register, registerElement);
 }
----------------- file content ----------------
+```
 
 
-** Edit project4\frontend\templates\network\index.html to add a div with id=index
+### Edit project4\frontend\templates\network\index.html to add a div with id=index
 Open
 index.html
 located at
@@ -410,16 +410,16 @@ C:\PSET4_Network\project4\frontend\templates\network
 Add
 <div id="index"></div>
 inside body
----------------- file content ----------------
+```
 {% extends "network/layout.html" %}
 
 {% block body %}
     <div id="index"></div>
 {% endblock %}
----------------- file content ----------------
+```
 
 
-** Edit project4\frontend\templates\network\register.html to add a div with id=register
+### Edit project4\frontend\templates\network\register.html to add a div with id=register
 Open
 register.html
 located at
@@ -428,13 +428,13 @@ Add
 <div id="register"></div>
 
 The end of the file should look like:
----------------- file content ----------------
+```
     </form>
 
     Already have an account? <a href="{% url 'login' %}">Log In here.</a>
     <div id="register"></div>
 {% endblock %}
----------------- file content ----------------
+```
 
 If everything went well, the messages should appear in
 http://localhost:8000/
