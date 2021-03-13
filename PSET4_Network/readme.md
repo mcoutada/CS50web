@@ -423,7 +423,7 @@ Add
 ```
 <div id="index"></div>
 ```  
-inside body  
+inside body. It should look like:  
 ```  
 {% extends "network/layout.html" %}  
   
@@ -439,8 +439,10 @@ register.html
 located at  
 C:\PSET4_Network\project4\frontend\templates\network  
 Add  
+```  
 <div id="register"></div>  
-  
+```  
+
 The end of the file should look like:  
 ```  
     </form>  
