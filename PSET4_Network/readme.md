@@ -256,10 +256,14 @@ ReactDOM.render(<div><App/></div>, AppDiv);
   
 ### add a div with id=main, and a script html tag for main.js before closing the body tag in layout.html  
 Add  
+```  
     <div id="app"></div>  
     <script src="{% static "frontend/main.js" %}"></script>  
+```  
 before  
+```  
     </body>  
+```  
 in  
 C:\Users\asd\Desktop\tests\CS50Web\mygithub\PSET4_Network\project4\frontend\templates\network\layout.html  
 Last part of layout.html should look like this:  
