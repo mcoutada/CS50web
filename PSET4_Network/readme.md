@@ -1,6 +1,8 @@
+# Initial setup React/Django for Network exercise
+
 See this tutorial to understand how react is implemented in the frontend (videos 1, 2 and 3)
 
-# Django & React Tutorial #1 - Full Stack Web App With Python & JavaScript
+## Django & React Tutorial #1 - Full Stack Web App With Python & JavaScript
   
 [https://www.youtube.com/watch?v=JD-age0BPVo&list=RDCMUC4JX40jDee_tINbkjycV4Sg](https://www.youtube.com/watch?v=JD-age0BPVo&list=RDCMUC4JX40jDee_tINbkjycV4Sg)
   
