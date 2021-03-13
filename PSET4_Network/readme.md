@@ -410,7 +410,9 @@ index.html
 located at  
 C:\PSET4_Network\project4\frontend\templates\network  
 Add  
-<div id="index"></div>  
+```
+<div id="index"></div>
+```  
 inside body  
 ```  
 {% extends "network/layout.html" %}  
