@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Register from "./components/Register";
 import Home from "./components/Home";
+import Profile from "./components/Profile";
 
 const home = (
     <div>
@@ -9,9 +9,9 @@ const home = (
     </div>
 );
 
-const register = (
+const profile = (
     <div>
-        <Register />
+        <Profile />
     </div>
 );
 
@@ -20,7 +20,7 @@ if (rootElement) {
     ReactDOM.render(home, rootElement);
 }
 
-const registerElement = document.getElementById("register");
-if (registerElement) {
-    ReactDOM.render(register, registerElement);
+const profileElement = document.getElementById("profile");
+if (profileElement) {
+    ReactDOM.render(profile, profileElement);
 }
