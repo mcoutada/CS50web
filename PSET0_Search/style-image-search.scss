@@ -1,0 +1,51 @@
+@import 'style';
+
+.google {
+
+    .google-body {
+
+        form {
+
+            .search {
+                input {
+                    width: 100%;
+                    padding: 0.8em em;
+                    border-radius: 30px;
+                    outline: none;
+                    border: 1px solid $search-border-color;
+                    transition: all 0.3s ease;
+                    background-color: transparent;
+                    color: $color;
+                    font-size: 16px;
+                    word-wrap: break-word;
+                }
+                .fa-search,
+                .right-icon {
+                    position: absolute;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    color: $btn_color;
+                }
+                .right-icon {
+                    right: 0px;
+                }
+
+                .fa-microphone {
+                    position: absolute;
+                    top: 10px;
+                    transform: translate(200%, -50%);
+                    color: $btn_color;
+                }
+
+                .fa-camera {
+                    margin-right: 25px;
+                }
+                .fa-search {
+                    left: 25px;
+                }
+            }
+        }
+
+    }
+}
+

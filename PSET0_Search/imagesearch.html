@@ -4,67 +4,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/favicon.png" />
     <title>Google</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css" type="text/css">
+    <!-- Personal CSS -->
+    <link rel="stylesheet" href="./css/style-image-search.css" type="text/css">
 </head>
 
 <body>
-    <div class="google">
-        <div class="google-header">
-
-            <a href="">Gmail</a>
-            <a href="">Images</a>
-            <a href=""><img src="./images/bars.png"></a>
-            <a href="">
-                <i class="fas fa-user-circle"></i>
-            </a>
-
-        </div>
-        <div class="google-body">
-            <img src="./images/google_logo.png" alt="Google">
-            <form action="https://google.com/search">
-                <div class="search">
-                    <input type="text" name="q">
-                    <i class="fas fa-search"></i>
-                    <i class="fas fa-microphone"></i>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <!-- personal scripting -->
+    <link rel="stylesheet" href="js/script.js">
+    <script src="js/script.js"></script>
+    <div class="container-fluid m-0 p-0">
+        <div class="google">
+            <div class="row m-0 p-0">
+                <div class="col m-0 p-0">
+                    <div class="google-header">
+                        <a href="index.html">Search</a>
+                        <a href="advanced-search.html">Advanced Search</a>
+                        <a href="https://gmail.com/">Gmail</a>
+                        <a href="https://workspace.google.com/"><img src="./images/bars.png"></a>
+                        <a href="https://www.google.com/account/">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="buttons">
-                    <button type="submit">Google Search</button>
-                    <button>I'm feeling lucky</button>
-                </div>
-            </form>
-            <div class="languages">
-                Google offered in:
-                <a href="https://www.google.com/?hl=en">English</a>
-                <a href="https://www.google.com/?hl=es">Spanish</a>
             </div>
-        </div>
-        <div class="google-footer">
-            <a href="">Argentina</a>
-            </hr>
-            <div class="footer-down">
-                <div class="footer-down-left">
-                    <a href="">Advertising</a>
-                    <a href="">Business</a>
-                    <a href="">About</a>
-                    <a href="">How to Search</a>
+            <div class="row m-0 p-0">
+                <div class="col m-0 p-0"></div>
+                <div class="col m-0 p-0">
+                    <div class="google-body m-0 p-0">
+                        <img src="./images/google_img_logo.png" alt="Google">
+                        <form action="http://images.google.com/images">
+                            <div class="search">
+                                <input type="text" name="q" id="transcript">
+                                <i class="fas fa-search"></i>
+                                <div class="right-icon">
+                                <i class="fas fa-camera"></i>
+                                <i onclick="startDictation()" class="fas fa-microphone"></i>
+                            </div>
+                            </div>
+                            <!-- <div class="buttons">
+                                <input type="submit" name="btnK" value="Google Search" class="button">
+                                <input type="submit" name="btnI" value="I am Feeling Lucky" class="button">
+                            </div> -->
+                        </form>
+                        <!-- <div class="languages">
+                            Google offered in:
+                            <div class="language-type">
+                                <a href="https://www.google.com/?hl=en">English</a>
+                                <a href="https://www.google.com/?hl=es">Spanish</a>
+                            </div>
+                        </div> -->
+                    </div>
                 </div>
-                <div class="footer-down-right">
-                    <a href="">Privacy</a>
-                    <a href="">Terms</a>
-                    <a href="">Settings</a>
+                <div class="col m-0 p-0">
+                </div>
+            </div>
+            <div class="row m-0 p-0">
+                <div class="col m-0 p-0">
+                    <div class="google-footer">
+                        <a href="">Argentina</a>
+                        </hr>
+                        <div class="footer-down">
+                            <div class="footer-down-left">
+                                <a href="https://ads.google.com/intl/en_ar/home/">Advertising</a>
+                                <a href="https://www.google.com/services/">Business</a>
+                                <a href="https://about.google/">About</a>
+                                <a href="https://www.google.com/search/howsearchworks/">How to Search</a>
+                            </div>
+                            <div class="footer-down-right">
+                                <a href="https://policies.google.com/privacy?hl=en">Privacy</a>
+                                <a href="https://policies.google.com/terms?hl=en">Terms</a>
+                                <div class="dropdown">
+                                    <button class="dropbtn">Settings</button>
+                                    <div class="dropdown-content">
+                                        <a href="https://www.google.com/preferences?hl=en">Search settings</a>
+                                        <a href="advanced-search.html">Advanced search</a>
+                                        <a href="https://myactivity.google.com/privacyadvisor/search?utm_source=googlemenu&fg=1&pli=1">Your data in Search</a>
+                                        <a href="https://myactivity.google.com/product/search?utm_source=google&hl=en-AR&fg=1">Search activity</a>
+                                        <a href="https://support.google.com/websearch/?p=ws_results_help&hl=en-AR&fg=1">Search help</a>
+                                        <a href="https://www.google.com/webhp?hl=en#">Send feedback</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-    <!-- <form action="https://google.com/search">
-        <input type="text" name="q">
-        <input type="submit" value="Google Search">
-    </form> -->
 </body>
 
 </html>
